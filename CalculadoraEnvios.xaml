@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E160851.CalculadoraEnvios"
+             Title="Calculadora de Envíos" BackgroundColor="#0F172A">
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="15" VerticalOptions="Center">
+
+            <Label Text="Calculadora de Envíos" FontSize="26" FontAttributes="Bold" TextColor="#F8FAFC" HorizontalOptions="Center"/>
+
+            <!-- Campo para ingresar el nombre del paquete -->
+            <Entry x:Name="txtPaquete" FontSize="16" Placeholder="Documentos o paquete ejemplo" PlaceholderColor="#64748B" TextColor="#F8FAFC" BackgroundColor="#1E293B" Keyboard="Text"/>
+
+
+            <!-- Campo para ingresar el peso -->
+            <Entry x:Name="txtPeso" FontSize="16" Placeholder="Peso del paquete (kg)" PlaceholderColor="#64748B" TextColor="#F8FAFC" BackgroundColor="#1E293B" Keyboard="Numeric"/>
+
+        
+
+            <!-- Seleccionador destino -->
+            <Label Text="Seleccione la Zona de destino" TextColor="#94A3B8" FontSize="14" FontAttributes="Bold"/>
+            <Picker x:Name="pckDestino" Title="Seleccione Zona de destino.." TitleColor="#64748B" TextColor="#F8FAFC" BackgroundColor="#1E293B">
+                <Picker.Items>
+                    <x:String>Zona Local (Tarifa base de L50.00 por KG)</x:String>
+                    <x:String>Zona Nacional (Tarifa base de L85.00 por KG)</x:String>
+                    <x:String>Zona Internacional (Tarifa base de L150.00 por KG)</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Servicio Expres (+ L100.00)" TextColor="#94A3B8" FontSize="14" FontAttributes="Bold"/>
+            <CheckBox x:Name="chkServicioExpres" Color="#38BDF8"/>
+            
+            <!-- Botones de acción -->
+            <Button x:Name="btnConvertir" Text="Convertir" Clicked="OnConvertirClicked" BackgroundColor="#38BDF8" TextColor="#0F172A" FontAttributes="Bold" CornerRadius="8" HeightRequest="50"/>
+            <Button x:Name="btnLimpiar" Text="Limpiar" Clicked="OnLimpiarClicked" BackgroundColor="#334155" TextColor="#F8FAFC" FontAttributes="Bold" CornerRadius="8" HeightRequest="50"/>
+
+            <!-- Etiqueta para desplegar el resultado -->
+            <Border x:Name="brResultado" Stroke="#334155" StrokeShape="RoundRectangle 12" BackgroundColor="#1E293B" Padding="20" IsVisible="False" Margin="0,10,0,0">
+                <VerticalStackLayout>
+                    <Label Text="Resultado:" TextColor="#94A3B8" FontSize="14" FontAttributes="Bold"/>
+                    <Label x:Name="lblCosto" FontSize="32" FontAttributes="Bold" TextColor="#F8FAFC" HorizontalOptions="Center"/>
+                    <Label x:Name="lblDetalle" FontSize="12" TextColor="#94A3B8" HorizontalOptions="Center" HorizontalTextAlignment="Start" Margin="0,5,0,0"/>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
