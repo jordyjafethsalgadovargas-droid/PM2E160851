@@ -7,8 +7,8 @@
     Title="PM2E160851">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Calculadora de Envíos"
+        ContentTemplate="{DataTemplate local:CalculadoraEnvios}"
+        Route="CalculadoraEnvios" />
 
 </Shell>

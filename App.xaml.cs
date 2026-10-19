@@ -1,20 +1,15 @@
-﻿namespace PM2E160851
+﻿namespace PM2E160851;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
+        InitializeComponent();
+    }
 
-            InitializeComponent();
-
-            MainPage = new CalculadoraEnvios();
-
-        }
-
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new CalculadoraEnvios());
-        }
-
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        // Esto le indica a la app que use el AppShell como la ventana principal
+        return new Window(new AppShell());
     }
 }

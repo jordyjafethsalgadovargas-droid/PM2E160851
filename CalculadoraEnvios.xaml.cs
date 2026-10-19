@@ -4,10 +4,10 @@ namespace PM2E160851;
 
 public partial class CalculadoraEnvios : ContentPage
 {
-	public CalculadoraEnvios()
-	{
-		InitializeComponent();
-	}
+    public CalculadoraEnvios()
+    {
+        InitializeComponent();
+    }
 
     private async void OnConvertirClicked(object sender, EventArgs e)
     {
@@ -19,6 +19,13 @@ public partial class CalculadoraEnvios : ContentPage
         {
             // Validar que el campo no esté vacío y sea numérico usar decimal para dinero
             var pesoText = txtPeso.Text?.Trim();
+
+            if (string.IsNullOrWhiteSpace(txtPaquete.Text))
+            {
+                await DisplayAlert("Error", "Por favor ingrese el nombre o descripción del paquete.", "OK");
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(pesoText) || !decimal.TryParse(pesoText, NumberStyles.Number, CultureInfo.CurrentCulture, out decimal peso))
             {
                 await DisplayAlert("Error", "Por favor ingrese un peso numérico válido (sin letras ni espacios).", "OK");
@@ -48,8 +55,9 @@ public partial class CalculadoraEnvios : ContentPage
                 _ => 0.0M
             };
 
-            // Cálculo del costo
+            // Cálculo del costo (Se agregó el operador *)
             decimal costo = peso * tarifaPorKg;
+
             if (chkServicioExpres.IsChecked)
             {
                 costo += 100.00M; // cargo fijo por servicio exprés
@@ -57,7 +65,10 @@ public partial class CalculadoraEnvios : ContentPage
 
             // Mostrar resultado formateado
             lblCosto.Text = $"L {costo:N2}";
-            lblDetalle.Text = $"Paquete: {txtPaquete.Text}\nZona: {pckDestino.Items[pckDestino.SelectedIndex]}\nPeso: {peso} kg{(chkServicioExpres.IsChecked ? "\nServicio: Expres (+L100)" : string.Empty)}";
+            lblDetalle.Text = $"Paquete: {txtPaquete.Text}\n" +
+                $"Zona: {pckDestino.Items[pckDestino.SelectedIndex]}\n" +
+                $"Peso: {peso} kg{(chkServicioExpres.IsChecked ? "\n" +
+                "Servicio: Expres (+L100)" : string.Empty)}";
             brResultado.IsVisible = true;
         }
         finally
